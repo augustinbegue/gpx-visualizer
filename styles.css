@@ -1,0 +1,32 @@
+.file-selector {
+  width: 100vw;
+  height: 100vh;
+}
+
+#rideMap {
+  height: 75vh;
+}
+
+.speedometer {
+  border-radius: 100px;
+  overflow: hidden;
+  background-color: white;
+  border: 2px solid red;
+  padding: 0.5em;
+  width: 5em;
+  height: 5em;
+  text-align: center;
+  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+  -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+  box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+}
+
+.speedometer-text {
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+.speedometer-legend {
+  position: relative;
+  bottom: 3px;
+}
