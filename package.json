@@ -1,0 +1,22 @@
+{
+    "scripts": {
+        "type-check": "tsc --noEmit",
+        "type-check:watch": "npm run type-check -- --watch",
+        "build": "webpack --mode=production"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.8.3",
+        "@babel/core": "^7.8.3",
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/preset-env": "^7.8.3",
+        "@babel/preset-typescript": "^7.8.3",
+        "babel-loader": "^8.1.0",
+        "typescript": "^3.7.5",
+        "webpack": "^4.44.1",
+        "webpack-cli": "^3.3.12"
+    },
+    "dependencies": {
+        "@types/leaflet": "^1.5.17",
+        "leaflet": "^1.6.0"
+    }
+}

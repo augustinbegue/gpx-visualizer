@@ -23,7 +23,8 @@
   position: absolute;
   width: 1em;
   height: 1em;
-  background-color: black;
+  background-color: #4287f5;
+  border: 4px solid white;
   border-radius: 1em;
   display: block;
   z-index: 10;
@@ -36,45 +37,47 @@
   background-color: white;
   border: 4px solid red;
   padding: 0.5em;
-  width: 20em;
-  height: 20em;
-  text-align: center;
-  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-  -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-  box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-}
-
-.speedometer-text {
-  font-weight: 700;
-  font-size: 10em;
-}
-
-.speedometer-legend {
-  position: relative;
-  font-size: 2em !important;
-  bottom: 1em;
-}
-
-.elevation {
-  border-radius: 2.5em;
-  overflow: hidden;
-  background-color: white;
-  border: 4px solid gray;
-  padding: 0.5em;
-  width: 15em;
+  width: 10em;
   height: 10em;
   text-align: center;
   -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
   -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
   box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+  display: none;
+}
+
+.speedometer-text {
+  font-weight: 700;
+  font-size: 5em;
+}
+
+.speedometer-legend {
+  position: relative;
+  font-size: 1em !important;
+  bottom: 1em;
+}
+
+.elevation {
+  border-radius: 1em;
+  overflow: hidden;
+  background-color: white;
+  border: 4px solid gray;
+  padding: 0.5em;
+  width: 11em;
+  height: 6em;
+  text-align: center;
+  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+  -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+  box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+  display: none;
 }
 
 .elevation-text {
   font-weight: 700;
-  font-size: 6em;
+  font-size: 3em;
 }
 
 .elevation-legend {
-  font-size: 2em !important;
+  font-size: 1em !important;
   text-transform: uppercase;
 }

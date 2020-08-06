@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GPX Visualizer</title>
-    <script src="./index.js"></script>
+    <script src="./dist/bundle.js"></script>
     <!-- Custom style -->
     <link rel="stylesheet" href="./styles.css" />
     <!-- Bulma -->
@@ -27,7 +27,7 @@
           </span>
           <span>Upload</span>
         </a>
-        <input type="file" name="ride" id="ride" accept=".gpx" onchange="loadFile(this.files)" style="display: none;" />
+        <input type="file" name="ride" id="ride" accept=".gpx" style="display: none;" />
       </div>
       <div id="gpx" class="box gpx-overview has-text-centered" style="display: none;">
         <div class="columns is-mobile">
@@ -78,12 +78,18 @@
         </div>
         <div class="columns is-mobile">
           <div class="column">
-            <button id="startVisualisation" class="button is-rounded">
-              <span class="icon">
-                <i class="fas fa-play"></i>
-              </span>
-              <span>Start visualisation</span>
-            </button>
+            <div class="buttons">
+              <button id="startVisualisation" class="button is-rounded">
+                <span class="icon">
+                  <i class="fas fa-play"></i>
+                </span>
+              </button>
+              <button id="stopVisualisation" class="button is-rounded">
+                <span class="icon">
+                  <i class="fas fa-stop"></i>
+                </span>
+              </button>
+            </div>
           </div>
           <div class="column">
             <div class="field">
