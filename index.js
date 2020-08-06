@@ -14,7 +14,7 @@ window.onload = function () {
       if (fileElem) {
         fileElem.click();
       }
-      e.preventDefault(); // empêche la navigation vers "#"
+      e.preventDefault();
     },
     false
   );
@@ -81,7 +81,7 @@ function startVisualisation(map, speedData) {
   const speedSelector = document.getElementById("speedSelector")
   let animationSpeed = speedSelector.options[speedSelector.selectedIndex].value;
 
-  map.setView(speedData[0].loc1.loc, 18, {animate: false});
+  map.setView(speedData[0].loc1.loc, 16, {animate: false});
 
   function animate() {
     animationSpeed = speedSelector.options[speedSelector.selectedIndex].value;
@@ -106,10 +106,38 @@ function startVisualisation(map, speedData) {
 
 function displayLiveSpeed(computedSpeed, duration, animationSpeed) {
   const liveSpeedSpan = document.getElementById("speedometer");
-  const liveSpeed = parseInt(liveSpeedSpan.innerText);
+  const currentSpeed = liveSpeedSpan.innerText;
+  let sign, difference;
 
-  if (duration > (1 / animationSpeed)) {
-    liveSpeedSpan.innerHTML = computedSpeed;
+  if (currentSpeed > computedSpeed) {
+    sign = -1;
+    difference = currentSpeed - computedSpeed;
+  } else {
+    sign = 1;
+    difference = computedSpeed - currentSpeed;
+  }
+
+  if (duration > (0.2 / animationSpeed)) {
+
+    let interval = setInterval(
+      function(){
+        let displayedSpeed = parseInt(liveSpeedSpan.innerText);
+        
+        if (displayedSpeed === computedSpeed) { 
+          clearInterval(interval);
+        }
+
+        console.log(displayedSpeed, computedSpeed, difference, sign);
+
+        if (sign > 0) {
+          displayedSpeed++;
+        } else {
+          displayedSpeed--;
+        }
+
+        liveSpeedSpan.innerHTML = displayedSpeed;
+      },
+    ((duration - 0.5) / difference) * 1000);
   }  
 }
 
@@ -195,11 +223,19 @@ function placeMarkers(map, gpxData, speedData, speedDataHighlights) {
   const endPoint = gpxData.segments[gpxData.segments.length - 1][gpxData.segments[gpxData.segments.length - 1].length - 1].loc;
   const maxSpeedPoint = speedData[speedDataHighlights.maxSpeedIndex].loc1.loc;
 
-  const startMarker = L.marker(startPoint).addTo(map).bindPopup("<b>Start</b>");
+  const gpxMarker = L.icon({
+    iconUrl: 'assets/map-marker-alt-solid.svg',
 
-  const endMarker = L.marker(endPoint).addTo(map).bindPopup("<b>Finish</b>");
+    iconSize:     [30, 30], // size of the icon
+    iconAnchor:   [15, 30], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+  });
+  
+  const startMarker = L.marker(startPoint, {icon: gpxMarker}).addTo(map).bindPopup("<b>Start</b>");
 
-  const maxSpeedMarker = L.marker(maxSpeedPoint)
+  const endMarker = L.marker(endPoint, {icon: gpxMarker}).addTo(map).bindPopup("<b>Finish</b>");
+
+  const maxSpeedMarker = L.marker(maxSpeedPoint, {icon: gpxMarker})
     .addTo(map)
     .bindPopup("<b>Max Speed</b><br>" + Math.round(speedDataHighlights.maxSpeed * 100) / 100 + " km/h");
 }

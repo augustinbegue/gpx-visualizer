@@ -8,13 +8,13 @@
 }
 
 .speedometer {
-  border-radius: 100px;
+  border-radius: 20em;
   overflow: hidden;
   background-color: white;
-  border: 2px solid red;
+  border: 4px solid red;
   padding: 0.5em;
-  width: 5em;
-  height: 5em;
+  width: 20em;
+  height: 20em;
   text-align: center;
   -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
   -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
@@ -23,10 +23,11 @@
 
 .speedometer-text {
   font-weight: 700;
-  font-size: 1.5em;
+  font-size: 10em;
 }
 
 .speedometer-legend {
   position: relative;
-  bottom: 3px;
+  font-size: 3em !important;
+  bottom: 1em;
 }
