@@ -1,5 +1,6 @@
 import * as L from "leaflet";
 import { GpxData, SpeedData, SpeedDataHighlights } from "../../types";
+import markerIcon from "../assets/map-marker-alt-solid.svg";
 
 export function placeMarkers(map: L.Map, gpxData: GpxData, speedData: Array<SpeedData>, speedDataHighlights: SpeedDataHighlights) {
   const startPoint = gpxData.segments[0][0].loc;
@@ -7,7 +8,7 @@ export function placeMarkers(map: L.Map, gpxData: GpxData, speedData: Array<Spee
   const maxSpeedPoint = speedData[speedDataHighlights.maxSpeedIndex].loc1.loc;
 
   const gpxMarker = L.icon({
-    iconUrl: "assets/map-marker-alt-solid.svg",
+    iconUrl: markerIcon,
 
     iconSize: [30, 30],
     iconAnchor: [15, 30],

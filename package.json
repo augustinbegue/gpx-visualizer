@@ -2,7 +2,7 @@
     "scripts": {
         "type-check": "tsc --noEmit",
         "type-check:watch": "npm run type-check -- --watch",
-        "build": "webpack --mode=production"
+        "build": "webpack --mode=production && cp src/index.html dist/index.html && cp src/styles.css dist/styles.css"
     },
     "devDependencies": {
         "@babel/cli": "^7.8.3",
@@ -12,6 +12,7 @@
         "@babel/preset-typescript": "^7.8.3",
         "babel-loader": "^8.1.0",
         "typescript": "^3.7.5",
+        "url-loader": "^4.1.0",
         "webpack": "^4.44.1",
         "webpack-cli": "^3.3.12"
     },
