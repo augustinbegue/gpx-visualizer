@@ -1,4 +1,6 @@
 import { SpeedData, SpeedDataHighlights } from "../../types";
+import { maxRealSpeed } from "../../constants";
+import KalmanFilter from 'kalmanjs';
 
 export function computeHighlights(result: Array<SpeedData>): SpeedDataHighlights {
   let totalTime = 0,
@@ -22,24 +24,8 @@ export function computeHighlights(result: Array<SpeedData>): SpeedDataHighlights
       movingTime += seg.time;
     }
 
-    let j,
-      maxAvg = 0,
-      maxAvgTime = 0;
-    for (j = i - 5; j <= i + 5; j++) {
-      let tempseg;
-
-      if (!result[j])
-        break;
-
-      tempseg = result[j].computed;
-      maxAvg += tempseg.speed * tempseg.time;
-      maxAvgTime += tempseg.time;
-    }
-
-    let newMaxSpeed = maxAvg / maxAvgTime;
-
-    if (newMaxSpeed > maxSpeed && !isNaN(newMaxSpeed)) {
-      maxSpeed = newMaxSpeed;
+    if (seg.speed > maxSpeed && !isNaN(seg.speed) && seg.speed < maxRealSpeed) {
+      maxSpeed = seg.speed;
       maxSpeedIndex = i;
     }
   }
