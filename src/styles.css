@@ -81,3 +81,9 @@
   font-size: 1em !important;
   text-transform: uppercase;
 }
+
+#speedChartContainer {
+  position: relative;
+  height: 20vh;
+  width: 100%;
+}

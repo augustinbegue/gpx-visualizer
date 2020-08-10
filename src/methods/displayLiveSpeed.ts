@@ -21,7 +21,7 @@ export function displayLiveSpeed(computedSpeed: number, duration: number, animat
   }
 
   if (duration > 0.2 / animationSpeed) {
-    if (animationSpeed > 10 || difference < 2) {
+    if (animationSpeed > 5 || difference <= 2) {
       return (liveSpeedSpan.innerHTML = computedSpeed.toString());
     }
 

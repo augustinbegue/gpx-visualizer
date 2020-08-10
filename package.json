@@ -2,7 +2,8 @@
     "scripts": {
         "type-check": "tsc --noEmit",
         "type-check:watch": "npm run type-check -- --watch",
-        "build": "webpack --mode=production && cp src/index.html dist/index.html && cp src/styles.css dist/styles.css"
+        "build": "webpack --mode=production && cp src/index.html dist/index.html && cp src/styles.css dist/styles.css",
+        "cp": "cp src/index.html dist/index.html && cp src/styles.css dist/styles.css"
     },
     "devDependencies": {
         "@babel/cli": "^7.8.3",
@@ -17,7 +18,9 @@
         "webpack-cli": "^3.3.12"
     },
     "dependencies": {
+        "@types/chart.js": "^2.9.23",
         "@types/leaflet": "^1.5.17",
+        "chart.js": "^2.9.3",
         "leaflet": "^1.6.0"
     }
 }
