@@ -19,16 +19,22 @@
   width: 100%;
 }
 
-#centerCursor {
+#centerCursor, #locationMarker {
   position: absolute;
-  width: 1em;
-  height: 1em;
+  width: 20px;
+  height: 20px;
   background-color: #4287f5;
   border: 4px solid white;
-  border-radius: 1em;
+  border-radius: 20px;
   display: block;
   z-index: 10;
   display: none;
+}
+
+.location-marker-container {
+  position: absolute;
+  width: 20px;
+  height: 20px;
 }
 
 .speedometer {
@@ -84,6 +90,17 @@
 
 #speedChartContainer {
   position: relative;
-  height: 20vh;
+  height: 25vh;
   width: 100%;
+}
+
+#chartjs-tooltip {
+  background-color: #292929CC;
+  border-radius: 4px;
+  color: white;
+}
+
+#chartjs-pointer {
+  width: 1px;
+  background-color: #292929;
 }
