@@ -12,9 +12,11 @@
         "@babel/preset-env": "^7.8.3",
         "@babel/preset-typescript": "^7.8.3",
         "babel-loader": "^8.1.0",
+        "compression-webpack-plugin": "^4.0.0",
         "typescript": "^3.7.5",
         "url-loader": "^4.1.0",
         "webpack": "^4.44.1",
+        "webpack-bundle-analyzer": "^3.8.0",
         "webpack-cli": "^3.3.12"
     },
     "dependencies": {
@@ -22,6 +24,7 @@
         "@types/leaflet": "^1.5.17",
         "chart.js": "^2.9.3",
         "kalmanjs": "^1.1.0",
-        "leaflet": "^1.6.0"
+        "leaflet": "^1.6.0",
+        "regenerator-runtime": "^0.13.7"
     }
 }
