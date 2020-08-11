@@ -1,4 +1,5 @@
 import { Segment } from "../../types";
+
 export function parseGpxData(node: any, result?: any) {
   if (!result) {
     result = {
@@ -13,28 +14,53 @@ export function parseGpxData(node: any, result?: any) {
       break;
 
     case "trkseg":
-      let segment: Array<Segment> = [];
-      result.segments.push(segment);
+      let segments: Array<Segment> = [];
+      result.segments.push(segments);
+
       for (let i = 0; i < node.childNodes.length; i++) {
         let snode = node.childNodes[i];
+
         if (snode.nodeName == "trkpt") {
-          let trkpt = {
+          let trkpt: Segment = {
             loc: [parseFloat(snode.attributes["lat"].value), parseFloat(snode.attributes["lon"].value)],
-            time: 0,
-            ele: 0
           };
+
           for (let j = 0; j < snode.childNodes.length; j++) {
-            let ssnode = snode.childNodes[j];
+            const ssnode = snode.childNodes[j];
+
             switch (ssnode.nodeName) {
               case "time":
                 trkpt.time = new Date(ssnode.childNodes[0].data).getTime();
                 break;
+
               case "ele":
                 trkpt.ele = parseFloat(ssnode.childNodes[0].data);
                 break;
+
+              case "extensions":
+                const extnode = ssnode.childNodes[1]
+                
+                for (let k = 0; k < extnode.childNodes.length; k++) {
+                  const sssnode = extnode.childNodes[k];
+
+                  switch (sssnode.nodeName) {
+                    case "gpxtpx:atemp":
+                      trkpt.temp = parseFloat(sssnode.childNodes[0].data)
+                      break;
+                    case "gpxtpx:hr":
+                      trkpt.hr = parseFloat(sssnode.childNodes[0].data)
+                      break;
+                    case "gpxtpx:cad":
+                      trkpt.cad = parseFloat(sssnode.childNodes[0].data)
+                      break;
+                    default:
+                      break;
+                  }
+                }
+                break;
             }
           }
-          segment.push(trkpt);
+          segments.push(trkpt);
         }
       }
       break;

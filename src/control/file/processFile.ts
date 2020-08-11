@@ -4,18 +4,17 @@ import { computeSpeed } from "../data/computeSpeed";
 import { computeHighlights } from "../data/computeHighlights";
 import { parseXml } from "../data/parseXml";
 import { generateCharts } from "../../chartjs/generateCharts";
-import { GpxData } from "../../types";
 
-export function processFile(xmlStr: string) {
-  const gpxData: GpxData = parseXml(xmlStr);
+export async function processFile(xmlStr: string) {
+  window.__GLOBAL_DATA__.gpxData = parseXml(xmlStr);
 
-  const speedData = computeSpeed(gpxData);
+  window.__GLOBAL_DATA__.speedData = computeSpeed(window.__GLOBAL_DATA__.gpxData);
 
-  const speedDataHighlights = computeHighlights(speedData);
+  const speedDataHighlights = computeHighlights(window.__GLOBAL_DATA__.speedData);
 
-  displayHighlights(gpxData, speedDataHighlights);
+  displayHighlights(window.__GLOBAL_DATA__.gpxData, speedDataHighlights);
 
-  generateCharts(speedData, speedDataHighlights);
+  window.__GLOBAL_DATA__.map = await generateMap(window.__GLOBAL_DATA__.gpxData, window.__GLOBAL_DATA__.speedData, speedDataHighlights);
 
-  generateMap(gpxData, speedData, speedDataHighlights);
+  generateCharts();
 }

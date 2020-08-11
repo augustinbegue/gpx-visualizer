@@ -1,10 +1,22 @@
 export interface Segment {
   loc: Array<number>;
-  ele: Coordinates["altitude"];
-  time: number;
+  ele?: Coordinates["altitude"];
+  time?: number;
+  temp?: number;
+  hr?: number;
+  cad?: number;
 }
 
-export type Segments = Array<Segment>;
+export interface GlobalData {
+  gpxData: gpxData;
+  speedData: SpeedData;
+  speedDataHighlights: speedDataHighlights;
+  map: L.Map;
+  locationMarker: L.Marker;
+  currentIndex: number;
+  timeout: number;
+  playState: playState;
+}
 
 export interface GpxData {
   segments: Array<Segments>;
@@ -13,11 +25,14 @@ export interface GpxData {
 
 interface ComputedData {
   speed: number;
+  filteredSpeed: number;
   time: number;
   distance: number;
 }
 
-export interface SpeedData {
+export type SpeedData = Array<SpeedSegment>;
+
+export interface SpeedSegment {
   computed: ComputedData;
   loc1: Segment;
   loc2: Segment;

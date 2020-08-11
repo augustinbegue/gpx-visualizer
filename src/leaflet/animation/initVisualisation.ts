@@ -1,10 +1,10 @@
 import * as L from "leaflet";
-import { SpeedData, playState } from "../../types";
+import { SpeedSegment, playState } from "../../types";
 import { updateState } from "../../methods/updateState";
 import { startVisualisation } from "./startVisualisation";
 import { pauseVisualisation } from "./pauseVisualisation";
 
-export function initVisualisation(map: L.Map, speedData: Array<SpeedData>) {
+export function initVisualisation(map: L.Map, speedData: Array<SpeedSegment>) {
   const startButton = document.getElementById("startVisualisation");
   if (!startButton)
     throw new Error("startButton missing");
@@ -13,11 +13,11 @@ export function initVisualisation(map: L.Map, speedData: Array<SpeedData>) {
   if (!stopButton)
     throw new Error("stopButton missing");
 
-  localStorage.setItem("state", "stopped");
-  localStorage.setItem("currentIndex", "0");
+  window.__GLOBAL_DATA__.playState =  "stopped";
+  window.__GLOBAL_DATA__.currentIndex = 0;
 
   startButton.addEventListener("click", function () {
-    let newState: playState, state: playState = <playState>localStorage.getItem("state");
+    let newState: playState, state: playState = window.__GLOBAL_DATA__.playState;
 
     switch (state) {
       case "stopped":
@@ -41,7 +41,6 @@ export function initVisualisation(map: L.Map, speedData: Array<SpeedData>) {
   });
 
   stopButton.addEventListener("click", function () {
-    localStorage.setItem("state", "stopped");
     updateState(startButton, "stopped");
     pauseVisualisation();
 
@@ -55,6 +54,11 @@ export function initVisualisation(map: L.Map, speedData: Array<SpeedData>) {
       element.style.display = "none";
     }
 
-    localStorage.setItem("currentIndex", "0");
+    const centerCursor = document.getElementById("centerCursor");
+    if (!centerCursor)
+      throw new Error("centerCursor missing");
+    centerCursor.style.display = "none";
+
+    window.__GLOBAL_DATA__.currentIndex = 0;
   });
 }

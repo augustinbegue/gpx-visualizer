@@ -1,6 +1,6 @@
 import { playState } from "../types";
 export function updateState(startButton: HTMLElement, state: playState) {
-  localStorage.setItem("state", state);
+  window.__GLOBAL_DATA__.playState = state;
 
   const iconSpan = startButton.getElementsByClassName("icon")[0];
   let innerHTML;

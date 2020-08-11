@@ -1,10 +1,10 @@
-import { GpxData, SpeedData } from "../../types";
+import { GpxData, SpeedSegment } from "../../types";
 import { getSegDistance } from "./getSegDistance";
 import { getSegSpeed } from "./getSegSpeed";
 import KalmanFilter from "kalmanjs";
 import { kFilterR, kFilterQ } from "../../constants";
 
-export function computeSpeed(gpxData: GpxData): Array<SpeedData> {
+export function computeSpeed(gpxData: GpxData): Array<SpeedSegment> {
   const result = [];
 
   const kfSpeed = new KalmanFilter({R: kFilterR, Q: kFilterQ})
@@ -20,10 +20,13 @@ export function computeSpeed(gpxData: GpxData): Array<SpeedData> {
 
       const seg = getSegSpeed(d, locData1.time, locData2.time);
 
-      seg.speed = kfSpeed.filter(seg.speed)
+      const filteredSpeed = kfSpeed.filter(seg.speed)
 
       result.push({
-        computed: seg,
+        computed: {
+          ...seg,
+          filteredSpeed: filteredSpeed
+        },
         loc1: locData1,
         loc2: locData2,
       });

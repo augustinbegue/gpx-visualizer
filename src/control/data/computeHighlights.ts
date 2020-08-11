@@ -1,8 +1,7 @@
-import { SpeedData, SpeedDataHighlights } from "../../types";
+import { SpeedSegment, SpeedDataHighlights } from "../../types";
 import { maxRealSpeed } from "../../constants";
-import KalmanFilter from 'kalmanjs';
 
-export function computeHighlights(result: Array<SpeedData>): SpeedDataHighlights {
+export function computeHighlights(result: Array<SpeedSegment>): SpeedDataHighlights {
   let totalTime = 0,
     movingTime = 0,
     distance = 0,
@@ -24,8 +23,8 @@ export function computeHighlights(result: Array<SpeedData>): SpeedDataHighlights
       movingTime += seg.time;
     }
 
-    if (seg.speed > maxSpeed && !isNaN(seg.speed) && seg.speed < maxRealSpeed) {
-      maxSpeed = seg.speed;
+    if (seg.filteredSpeed > maxSpeed && !isNaN(seg.filteredSpeed) && seg.filteredSpeed < maxRealSpeed) {
+      maxSpeed = seg.filteredSpeed;
       maxSpeedIndex = i;
     }
   }

@@ -1,8 +1,9 @@
 import * as L from "leaflet";
 import { SpeedData } from "../../types";
 import { animate } from "./animate";
-export function startVisualisation(map: L.Map, speedData: Array<SpeedData>) {
-  let i = parseInt(<string>localStorage.getItem("currentIndex"));
+
+export function startVisualisation(map: L.Map, speedData: SpeedData) {
+  let i = window.__GLOBAL_DATA__.currentIndex;
 
   for (let i = 0; i < document.getElementsByClassName("speedometer").length; i++) {
     const element = <HTMLElement>document.getElementsByClassName("speedometer")[i];
@@ -26,6 +27,5 @@ export function startVisualisation(map: L.Map, speedData: Array<SpeedData>) {
 
   map.setView(<L.LatLngExpression>speedData[i].loc1.loc, 16, { animate: false });
 
-  let timeoutId = setTimeout(animate, (speedData[0].computed.time * 1000) / animationSpeed, i, map, speedSelector, speedData);
-  localStorage.setItem("timeout", timeoutId.toString());
+  window.__GLOBAL_DATA__.timeout = setTimeout(animate, (speedData[0].computed.time * 1000) / animationSpeed, i, map, speedSelector, speedData);
 }

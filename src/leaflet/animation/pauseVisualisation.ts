@@ -1,6 +1,6 @@
 export function pauseVisualisation() {
-  const timeoutId = <string>localStorage.getItem("timeout");
-  clearTimeout(parseInt(timeoutId));
+  const timeoutId = window.__GLOBAL_DATA__.timeout;
+  clearTimeout(timeoutId);
 
   const centerCursor = document.getElementById("centerCursor");
   if (!centerCursor)
