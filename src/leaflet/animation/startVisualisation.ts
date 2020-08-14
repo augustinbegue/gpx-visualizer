@@ -27,5 +27,6 @@ export function startVisualisation(map: L.Map, speedData: SegmentData) {
 
   map.setView(<L.LatLngExpression>speedData[i].loc1.loc, 16, { animate: false });
 
-  window.__GLOBAL_DATA__.timeout = setTimeout(animate, (speedData[0].computed.time * 1000) / animationSpeed, i, map, speedSelector, speedData);
+  if (speedData[0].computed.time)
+    window.__GLOBAL_DATA__.timeout = setTimeout(animate, (speedData[0].computed.time * 1000) / animationSpeed, i, map, speedSelector, speedData);
 }

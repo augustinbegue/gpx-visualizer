@@ -12,5 +12,6 @@ export function initTooltip() {
     document.body.appendChild(tooltipEl);
     document.body.appendChild(tooltipPointer);
   }
+  
   return { tooltipEl, tooltipPointer, locationMarker };
 }

@@ -1,9 +1,10 @@
-import { ChartTooltipModel, ChartTooltipModelBody, ChartTooltipItem } from "chart.js";
 import { setTooltipStyle } from "./setTooltipStyle";
 import { updateTooltipData } from "./updateTooltipData";
 import { initTooltip } from "./initTooltip";
 
-export function customTooltip(tooltipModel: ChartTooltipModel): void | undefined {
+export async function customTooltip(tooltipModel: Chart.ChartTooltipModel): Promise<void | undefined> {
+  const { default: Chart } = await import(/* webpackChunkName: "chartjs" */ 'chart.js');
+  
   let { tooltipEl, tooltipPointer, locationMarker } = initTooltip();
 
   // Hide if no tooltip
@@ -23,15 +24,13 @@ export function customTooltip(tooltipModel: ChartTooltipModel): void | undefined
     tooltipEl.classList.add('no-transform');
   }
 
-  function getBody(bodyItem: ChartTooltipModelBody) {
+  function getBody(bodyItem: Chart.ChartTooltipModelBody) {
     return bodyItem.lines;
   }
 
   // Set Text
-  updateTooltipData(tooltipModel, getBody, tooltipEl);
+  updateTooltipData(tooltipModel, getBody, tooltipEl, Chart);
 
   // `this` will be the overall tooltip
-  setTooltipStyle(this, tooltipEl, tooltipModel, tooltipPointer);
+  setTooltipStyle(tooltipEl, tooltipModel, tooltipPointer, Chart);
 }
-
-
