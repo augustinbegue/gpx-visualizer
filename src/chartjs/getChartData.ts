@@ -1,7 +1,7 @@
-import { ChartData } from "chart.js";
-import { SpeedSegment } from "../types";
+import { Segment } from "../types";
 import { getChartIndex } from "./getChartIndex";
-export function getChartData(speedData: SpeedSegment[]): ChartData {
+
+export function getChartData(speedData: Segment[]): Chart.ChartData {
   return {
     datasets: [
       {
@@ -24,7 +24,7 @@ export function getChartData(speedData: SpeedSegment[]): ChartData {
         data: speedData.map((element, index, arr) => {
           return {
             x: getChartIndex(index, arr),
-            y: Math.floor(element.computed.filteredSpeed * 100) / 100,
+            y: Math.floor(<number>element.computed.filteredSpeed * 100) / 100,
           };
         }),
       },

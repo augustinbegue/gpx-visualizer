@@ -1,8 +1,8 @@
 import * as L from "leaflet";
-import { SpeedData } from "../../types";
+import { SegmentData } from "../../types";
 import { animate } from "./animate";
 
-export function startVisualisation(map: L.Map, speedData: SpeedData) {
+export function startVisualisation(map: L.Map, speedData: SegmentData) {
   let i = window.__GLOBAL_DATA__.currentIndex;
 
   for (let i = 0; i < document.getElementsByClassName("speedometer").length; i++) {

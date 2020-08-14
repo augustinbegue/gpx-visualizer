@@ -1,7 +1,6 @@
-import { ChartTooltipModel, ChartTooltipModelBody } from "chart.js";
 import { placeLocationMarkerFromIndex } from "../../leaflet/animation/placeLocationMarker";
 
-export function updateTooltipData(tooltipModel: ChartTooltipModel, getBody: (bodyItem: ChartTooltipModelBody) => string[], tooltipEl: HTMLElement) {
+export function updateTooltipData(tooltipModel: Chart.ChartTooltipModel, getBody: (bodyItem: Chart.ChartTooltipModelBody) => string[], tooltipEl: HTMLElement, Chart: any) {
   if (tooltipModel.body) {
     const titleLines = tooltipModel.title || [];
     const bodyLines = tooltipModel.body.map(getBody);

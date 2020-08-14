@@ -1,6 +1,5 @@
-import { ChartTooltipModel } from "chart.js";
-export function setTooltipStyle(that: any, tooltipEl: HTMLElement, tooltipModel: ChartTooltipModel, tooltipPointer: HTMLElement) {
-  const position = that._chart.canvas.getBoundingClientRect();
+export function setTooltipStyle(tooltipEl: HTMLElement, tooltipModel: Chart.ChartTooltipModel, tooltipPointer: HTMLElement, Chart: any) {
+  const position = <DOMRect>window.__GLOBAL_DATA__.chart.canvas?.getBoundingClientRect();
 
   // Display, position, and set styles for font
   tooltipEl.style.opacity = '1';

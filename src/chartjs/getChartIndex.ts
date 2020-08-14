@@ -1,6 +1,6 @@
-import { SpeedSegment } from "../types";
+import { Segment } from "../types";
 
-export function getChartIndex(index: number, arr: Array<SpeedSegment>): number {
+export function getChartIndex(index: number, arr: Array<Segment>): number {
   if (index === 0) {
     return 0;
   }

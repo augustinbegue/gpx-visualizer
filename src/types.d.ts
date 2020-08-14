@@ -1,4 +1,4 @@
-export interface Segment {
+export interface GpxSegment {
   loc: Array<number>;
   ele?: Coordinates["altitude"];
   time?: number;
@@ -8,9 +8,10 @@ export interface Segment {
 }
 
 export interface GlobalData {
-  gpxData: gpxData;
-  speedData: SpeedData;
-  speedDataHighlights: speedDataHighlights;
+  chart: Chart;
+  gpxData: GpxData;
+  segmentData: SegmentData;
+  segmentStats: SegmentStats;
   map: L.Map;
   locationMarker: L.Marker;
   currentIndex: number;
@@ -19,33 +20,46 @@ export interface GlobalData {
 }
 
 export interface GpxData {
-  segments: Array<Segments>;
+  segments: Array<Array<GpxSegment>>;
   name: string;
 }
 
 interface ComputedData {
-  speed: number;
-  filteredSpeed: number;
-  time: number;
+  speed?: number;
+  filteredSpeed?: number;
+  time?: number;
   distance: number;
+  temp?: number;
+  hr?: number;
+  cad?: number;
 }
 
-export type SpeedData = Array<SpeedSegment>;
+export type SegmentData = Array<Segment>;
 
-export interface SpeedSegment {
+export interface Segment {
   computed: ComputedData;
-  loc1: Segment;
-  loc2: Segment;
+  loc1: GpxSegment;
+  loc2: GpxSegment;
 }
 
-export interface SpeedDataHighlights {
-  totalTime: number;
-  movingTime: number;
+export interface SegmentStats {
   distance: number;
-  avgSpeed: number;
-  avgMovingSpeed: number;
-  maxSpeed: number;
-  maxSpeedIndex: number;
+  totalTime?: number;
+  movingTime?: number;
+  avgSpeed?: number;
+  avgMovingSpeed?: number;
+  maxSpeed?: number;
+  maxSpeedIndex?: number;
+  avgTemp?: number;
+  maxTemp?: number;
+  avgHr?: number;
+  maxHr?: number;
+  maxHrIndex?: number;
+  avgCad?: number;
+  maxCad?: number;
+  maxCadIndex?: number;
 }
 
 export type playState = "stopped" | "inplay" | "paused";
+
+export type DataType = "text" | "speed" | "time" | "distance" | "temp" | "hr" | "cad"

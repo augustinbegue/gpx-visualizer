@@ -1,10 +1,10 @@
 import * as L from "leaflet";
-import { SpeedSegment, playState } from "../../types";
+import { Segment, playState } from "../../types";
 import { updateState } from "../../methods/updateState";
 import { startVisualisation } from "./startVisualisation";
 import { pauseVisualisation } from "./pauseVisualisation";
 
-export function initVisualisation(map: L.Map, speedData: Array<SpeedSegment>) {
+export function initVisualisation(map: L.Map, speedData: Array<Segment>) {
   const startButton = document.getElementById("startVisualisation");
   if (!startButton)
     throw new Error("startButton missing");

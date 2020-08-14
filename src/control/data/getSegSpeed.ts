@@ -6,6 +6,5 @@ export function getSegSpeed(d: number, time1: number, time2: number) {
   return {
     speed: kph,
     time: Δt,
-    distance: d,
   };
 }

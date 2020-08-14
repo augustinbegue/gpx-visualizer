@@ -1,4 +1,4 @@
-import { Segment } from "../../types";
+import { GpxSegment } from "../../types";
 
 export function parseGpxData(node: any, result?: any) {
   if (!result) {
@@ -14,14 +14,14 @@ export function parseGpxData(node: any, result?: any) {
       break;
 
     case "trkseg":
-      let segments: Array<Segment> = [];
+      let segments: Array<GpxSegment> = [];
       result.segments.push(segments);
 
       for (let i = 0; i < node.childNodes.length; i++) {
         let snode = node.childNodes[i];
 
         if (snode.nodeName == "trkpt") {
-          let trkpt: Segment = {
+          let trkpt: GpxSegment = {
             loc: [parseFloat(snode.attributes["lat"].value), parseFloat(snode.attributes["lon"].value)],
           };
 

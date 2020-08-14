@@ -2,7 +2,7 @@ import * as L from "leaflet";
 import { locationMarker } from "../assets/markers";
 
 export function placeLocationMarkerFromIndex(index: number) {
-  const speedData = window.__GLOBAL_DATA__.speedData
+  const speedData = window.__GLOBAL_DATA__.segmentData
 
   const segment = speedData[index]
 

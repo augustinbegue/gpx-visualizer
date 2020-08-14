@@ -2,7 +2,7 @@ import { chartOptions } from "./chartOptions";
 import { getChartData } from "./getChartData";
 
 export async function generateCharts() {
-  const speedData = window.__GLOBAL_DATA__.speedData;
+  const speedData = window.__GLOBAL_DATA__.segmentData;
   const { default: Chart } = await import(/* webpackChunkName: "chartjs" */ 'chart.js');
 
   const speedChartContainer = <HTMLElement>document.getElementById("speedChartContainer")
@@ -18,6 +18,8 @@ export async function generateCharts() {
     data: speedChartData,
     options: chartOptions,
   })
+
+  return speedChart;
 }
 
 

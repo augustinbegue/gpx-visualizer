@@ -1,12 +1,12 @@
 import * as L from "leaflet";
-import { GpxData, SpeedSegment, SpeedDataHighlights } from "../types";
+import { GpxData, Segment, SegmentStats } from "../types";
 import { initVisualisation } from "./animation/initVisualisation";
 import { addControls } from "./custom-controls/addControls";
 import { placeMarkers } from "./map/placeMarkers";
 import { drawPath } from "./map/drawPath";
 import { initMap } from "./map/initMap";
 
-export async function generateMap(gpxData: GpxData, speedData: Array<SpeedSegment>, speedDataHighlights: SpeedDataHighlights) {
+export async function generateMap(gpxData: GpxData, speedData: Array<Segment>, speedDataHighlights: SegmentStats) {
   const map = await initMap(); // Set map to use openstreetmap data
 
   // Define and place highlights markers
