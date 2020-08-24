@@ -1,5 +1,5 @@
 import { GpxData, SegmentStats } from "../../types";
-import { display } from "../../methods/display";
+import { display } from "../../helpers/display";
 
 export function displayStats(gpxData: GpxData, highlights: SegmentStats) {
   const gpx = document.getElementById("gpx");
@@ -22,6 +22,14 @@ export function displayStats(gpxData: GpxData, highlights: SegmentStats) {
   display("avgMovingSpeed", highlights.avgMovingSpeed, 'speed')
 
   display("maxSpeed", highlights.maxSpeed, 'speed')
+
+  display("minEle", highlights.minEle, 'elevation')
+
+  display("gainEle", highlights.gainEle, 'elevation')
+
+  display("maxEle", highlights.maxEle, 'elevation')
+
+  display("totEle", highlights.totEle, 'elevation')
 
   display("avgTemp", highlights.avgTemp, 'temp')
 

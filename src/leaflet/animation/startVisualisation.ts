@@ -2,8 +2,9 @@ import * as L from "leaflet";
 import { SegmentData } from "../../types";
 import { animate } from "./animate";
 
-export function startVisualisation(map: L.Map, speedData: SegmentData) {
+export function startVisualisation() {
   let i = window.__GLOBAL_DATA__.currentIndex;
+  const segmentData = window.__GLOBAL_DATA__.segmentData;
 
   for (let i = 0; i < document.getElementsByClassName("speedometer").length; i++) {
     const element = <HTMLElement>document.getElementsByClassName("speedometer")[i];
@@ -25,8 +26,8 @@ export function startVisualisation(map: L.Map, speedData: SegmentData) {
     throw new Error("centerCursor missing");
   centerCursor.style.display = "block";
 
-  map.setView(<L.LatLngExpression>speedData[i].loc1.loc, 16, { animate: false });
+  window.__GLOBAL_DATA__.map.setView(<L.LatLngExpression>segmentData[i].loc1.loc, 16, { animate: false });
 
-  if (speedData[0].computed.time)
-    window.__GLOBAL_DATA__.timeout = setTimeout(animate, (speedData[0].computed.time * 1000) / animationSpeed, i, map, speedSelector, speedData);
+  if (segmentData[0].computed.time)
+    window.__GLOBAL_DATA__.timeout = setTimeout(animate, (segmentData[0].computed.time * 1000) / animationSpeed, i, window.__GLOBAL_DATA__.map, speedSelector, segmentData);
 }

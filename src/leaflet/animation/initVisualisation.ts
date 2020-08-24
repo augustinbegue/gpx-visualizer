@@ -1,10 +1,13 @@
 import * as L from "leaflet";
-import { Segment, playState } from "../../types";
-import { updateState } from "../../methods/updateState";
+import { SegmentData, playState } from "../../types";
 import { startVisualisation } from "./startVisualisation";
 import { pauseVisualisation } from "./pauseVisualisation";
 
-export function initVisualisation(map: L.Map, speedData: Array<Segment>) {
+export function initVisualisation(map: L.Map, speedData: SegmentData) {
+  window.__GLOBAL_DATA__.playState =  "stopped";
+  window.__GLOBAL_DATA__.currentIndex = 0;
+
+  
   const startButton = document.getElementById("startVisualisation");
   if (!startButton)
     throw new Error("startButton missing");
@@ -13,52 +16,87 @@ export function initVisualisation(map: L.Map, speedData: Array<Segment>) {
   if (!stopButton)
     throw new Error("stopButton missing");
 
-  window.__GLOBAL_DATA__.playState =  "stopped";
-  window.__GLOBAL_DATA__.currentIndex = 0;
+  if (!startButton.classList.contains("initialized")) {
+    startButton.addEventListener("click", function () {
+      let newState: playState, state: playState = window.__GLOBAL_DATA__.playState;
+  
+      console.log('startButton');
+  
+      switch (state) {
+        case "stopped":
+          startVisualisation();
+          newState = "inplay";
+          break;
+        case "inplay":
+          pauseVisualisation();
+          newState = "paused";
+          break;
+        case "paused":
+          startVisualisation();
+          newState = "inplay";
+          break;
+        default:
+          newState = "paused";
+          break;
+      }
+  
+      updateState(startButton, newState);
+    });
 
-  startButton.addEventListener("click", function () {
-    let newState: playState, state: playState = window.__GLOBAL_DATA__.playState;
+    startButton.classList.add("initialized");
+  }
 
-    switch (state) {
-      case "stopped":
-        startVisualisation(map, speedData);
-        newState = "inplay";
-        break;
-      case "inplay":
-        pauseVisualisation();
-        newState = "paused";
-        break;
-      case "paused":
-        startVisualisation(map, speedData);
-        newState = "inplay";
-        break;
-      default:
-        newState = "paused";
-        break;
-    }
+  if (!stopButton.classList.contains("initialized")) {
+    stopButton.addEventListener("click", function () {
+      updateState(startButton, "stopped");
+      pauseVisualisation();
+  
+      console.log("stopButton");
+      
+      for (let i = 0; i < document.getElementsByClassName("speedometer").length; i++) {
+        const element = <HTMLElement>document.getElementsByClassName("speedometer")[i];
+        element.style.display = "none";
+      }
+  
+      for (let i = 0; i < document.getElementsByClassName("elevation").length; i++) {
+        const element = <HTMLElement>document.getElementsByClassName("elevation")[i];
+        element.style.display = "none";
+      }
+  
+      const centerCursor = document.getElementById("centerCursor");
+      if (!centerCursor)
+        throw new Error("centerCursor missing");
+      centerCursor.style.display = "none";
+  
+      window.__GLOBAL_DATA__.currentIndex = 0;
+    });
+  
+    stopButton.classList.add("initialized");
+  }
+}
 
-    updateState(startButton, newState);
-  });
+function updateState(startButton: HTMLElement, state: playState) {
+  window.__GLOBAL_DATA__.playState = state;
 
-  stopButton.addEventListener("click", function () {
-    updateState(startButton, "stopped");
-    pauseVisualisation();
+  console.log(state);
 
-    for (let i = 0; i < document.getElementsByClassName("speedometer").length; i++) {
-      const element = <HTMLElement>document.getElementsByClassName("speedometer")[i];
-      element.style.display = "none";
-    }
+  const iconSpan = startButton.getElementsByClassName("icon")[0];
+  let innerHTML;
 
-    for (let i = 0; i < document.getElementsByClassName("elevation").length; i++) {
-      const element = <HTMLElement>document.getElementsByClassName("elevation")[i];
-      element.style.display = "none";
-    }
+  switch (state) {
+    case "inplay":
+      innerHTML = `<i class="fas fa-pause"></i>`;
+      break;
+    case "stopped":
+      innerHTML = `<i class="fas fa-play"></i>`;
+      break;
+    case "paused":
+      innerHTML = `<i class="fas fa-play"></i>`;
+      break;
+    default:
+      innerHTML = `<i class="fas fa-play"></i>`;
+      break;
+  }
 
-    const centerCursor = document.getElementById("centerCursor");
-    if (!centerCursor)
-      throw new Error("centerCursor missing");
-    centerCursor.style.display = "none";
-
-    window.__GLOBAL_DATA__.currentIndex = 0;
-  });
+  iconSpan.innerHTML = innerHTML;
 }

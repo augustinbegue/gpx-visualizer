@@ -1,6 +1,6 @@
 import * as L from "leaflet";
-import { ElevationControl } from "./elevation-control";
-import { SpeedControl } from "./speed-control";
+import { ElevationControl } from "./ElevationControl";
+import { SpeedControl } from "./SpeedControl";
 import { mapboxUrl, mapboxAttribution } from "../../index";
 
 export function addControls(map: L.Map, markers: L.LayerGroup) {

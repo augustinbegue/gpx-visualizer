@@ -23,7 +23,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new CompressionPlugin({
       test: /\.(js|css|html|svg)$/,
     }),

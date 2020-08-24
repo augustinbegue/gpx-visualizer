@@ -1,4 +1,4 @@
-import { customTooltip } from "./custom-tooltip/customTooltip";
+import { customTooltip } from "./customTooltip";
 
 export const chartOptions: Chart.ChartOptions = {
   tooltips: {

@@ -1,5 +1,5 @@
-import { initDragAndDrop } from "./control/file/dropbox";
-import { loadFile } from "./control/file/loadFile";
+import { initDragAndDrop } from "./control/file/dropboxHelper";
+import { loadFile } from "./control/file/loader";
 import { GlobalData } from "./types";
 import "regenerator-runtime/runtime.js";
 

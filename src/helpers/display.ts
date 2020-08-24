@@ -18,6 +18,9 @@ export function display(id: string, data: any | undefined, type?: DataType): voi
     case "speed":
       text = Math.round(data * 100) / 100 + " km/h";
       break;
+    case "elevation":
+      text = Math.round(data) + " m";
+      break;
     case "time":
       let time = formatTime(data);
       text = `${time.hours}h ${time.minutes}m ${time.seconds}s`;

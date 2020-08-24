@@ -1,5 +1,5 @@
 import { Segment } from "../types";
-import { getChartIndex } from "./getChartIndex";
+import { getChartLabel } from "./labelHelper";
 
 export function getChartData(speedData: Segment[]): Chart.ChartData {
   return {
@@ -11,7 +11,7 @@ export function getChartData(speedData: Segment[]): Chart.ChartData {
         backgroundColor: '#4287f530',
         data: speedData.map((element, index, arr) => {
           return {
-            x: getChartIndex(index, arr),
+            x: getChartLabel(index, arr),
             y: <number>element.loc2.ele,
           };
         }),
@@ -23,7 +23,7 @@ export function getChartData(speedData: Segment[]): Chart.ChartData {
         backgroundColor: '#f5424230',
         data: speedData.map((element, index, arr) => {
           return {
-            x: getChartIndex(index, arr),
+            x: getChartLabel(index, arr),
             y: Math.floor(<number>element.computed.filteredSpeed * 100) / 100,
           };
         }),
@@ -35,14 +35,14 @@ export function getChartData(speedData: Segment[]): Chart.ChartData {
         backgroundColor: '#00000000',
         data: speedData.map((_element, index, arr) => {
           return {
-            x: getChartIndex(index, arr),
+            x: getChartLabel(index, arr),
             y: index,
           };
         }),
       },
     ],
     labels: speedData.map((_element, index, arr) => {
-      return getChartIndex(index, arr);
+      return getChartLabel(index, arr);
     }),
   };
 }

@@ -1,5 +1,5 @@
-import { processFile } from "./processFile";
-import { returnFileSize } from "../../methods/returnFileSize";
+import { processFile } from "./mainProcessor";
+import { returnFileSize } from "../../helpers/returnFileSize";
 
 export function loadFile(files: FileList) {
   const gpxFile = files[0];

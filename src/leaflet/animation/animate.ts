@@ -1,7 +1,7 @@
 import * as L from "leaflet";
 import { Segment } from "../../types";
-import { display } from "../../methods/display";
-import { customTooltip } from "../../chartjs/custom-tooltip/customTooltip";
+import { display } from "../../helpers/display";
+import { customTooltip } from "../../chartjs/customTooltip";
 import { getChartData } from "../../chartjs/getChartData";
 
 export function animate(i: number, map: L.Map, speedSelector: HTMLSelectElement, speedData: Array<Segment>) {

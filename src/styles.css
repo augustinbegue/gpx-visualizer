@@ -108,3 +108,7 @@
   width: 1px;
   background-color: #292929;
 }
+
+.dropdown-menu {
+  padding: 0 !important;
+}

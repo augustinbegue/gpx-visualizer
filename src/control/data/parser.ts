@@ -1,6 +1,12 @@
-import { GpxSegment } from "../../types";
+import { GpxData, GpxSegment } from "../../types";
 
-export function parseGpxData(node: any, result?: any) {
+export function parseXml(xmlstr: string): GpxData {
+  const doc = new DOMParser().parseFromString(xmlstr, "text/xml");
+
+  return parseGpxData(doc.documentElement);
+}
+
+function parseGpxData(node: any, result?: any) {
   if (!result) {
     result = {
       segments: [],

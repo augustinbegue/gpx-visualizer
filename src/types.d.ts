@@ -8,6 +8,9 @@ export interface GpxSegment {
 }
 
 export interface GlobalData {
+  currentChartLabel: number;
+  entryPoint: number;
+  exitPoint: number;
   chart: Chart;
   gpxData: GpxData;
   segmentData: SegmentData;
@@ -25,6 +28,7 @@ export interface GpxData {
 }
 
 interface ComputedData {
+  ele?: number;
   speed?: number;
   filteredSpeed?: number;
   time?: number;
@@ -44,6 +48,10 @@ export interface Segment {
 
 export interface SegmentStats {
   distance: number;
+  minEle: number;
+  maxEle: number;
+  gainEle: number;
+  totEle: number;
   totalTime?: number;
   movingTime?: number;
   avgSpeed?: number;
@@ -62,4 +70,4 @@ export interface SegmentStats {
 
 export type playState = "stopped" | "inplay" | "paused";
 
-export type DataType = "text" | "speed" | "time" | "distance" | "temp" | "hr" | "cad"
+export type DataType = "text" | "speed" | "time" | "distance" | "temp" | "hr" | "cad" | "elevation";
