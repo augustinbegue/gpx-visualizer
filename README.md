@@ -5,7 +5,7 @@
 # gpx-visualizer
 Tool allowing to visualize the live path represented by a gpx file on a map, with speed display
 
-[Try it here](https://tagueo.github.io/gpx-visualizer/)
+[Try it here](https://augustinbegue.github.io/gpx-visualizer/)
 
 ## Contributing
 
