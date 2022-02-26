@@ -1,10 +1,10 @@
 import { chartOptions } from "./chartOptions";
 import { getChartData } from "./getChartData";
 import { CustomContextMenu } from "./CustomContextMenu";
+import { Chart } from "chart.js";
 
 export async function generateCharts() {
   const segmentData = window.__GLOBAL_DATA__.segmentData;
-  const { default: Chart } = await import(/* webpackChunkName: "chartjs" */ 'chart.js');
 
   const speedChartContainer = <HTMLElement>document.getElementById("speedChartContainer")
   speedChartContainer.innerHTML = '<canvas id="speedChart"></canvas>';
@@ -20,7 +20,7 @@ export async function generateCharts() {
     options: chartOptions,
   })
 
-  const contextMenu = new CustomContextMenu('contextmenu', speedChartEl)
+  new CustomContextMenu('contextmenu', speedChartEl)
 
   return speedChart;
 }

@@ -1,7 +1,6 @@
 import { initDragAndDrop } from "./control/file/dropboxHelper";
 import { loadFile } from "./control/file/loader";
 import { GlobalData } from "./types";
-import "regenerator-runtime/runtime.js";
 
 export const mapboxUrl = "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}";
 export const mapboxAttribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
@@ -30,7 +29,7 @@ window.onload = function () {
       e.preventDefault();
     },
     false
-  );
+  )
 
   fileElem?.addEventListener("change", function () {
     loadFile(<FileList>this.files)

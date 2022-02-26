@@ -1,13 +1,12 @@
-import * as L from "leaflet";
-import { SegmentData, playState } from "../../types";
+import { playState } from "../../types";
 import { startVisualisation } from "./startVisualisation";
 import { pauseVisualisation } from "./pauseVisualisation";
 
-export function initVisualisation(map: L.Map, speedData: SegmentData) {
-  window.__GLOBAL_DATA__.playState =  "stopped";
+export function initVisualisation() {
+  window.__GLOBAL_DATA__.playState = "stopped";
   window.__GLOBAL_DATA__.currentIndex = 0;
 
-  
+
   const startButton = document.getElementById("startVisualisation");
   if (!startButton)
     throw new Error("startButton missing");
@@ -19,9 +18,9 @@ export function initVisualisation(map: L.Map, speedData: SegmentData) {
   if (!startButton.classList.contains("initialized")) {
     startButton.addEventListener("click", function () {
       let newState: playState, state: playState = window.__GLOBAL_DATA__.playState;
-  
+
       console.log('startButton');
-  
+
       switch (state) {
         case "stopped":
           startVisualisation();
@@ -39,7 +38,7 @@ export function initVisualisation(map: L.Map, speedData: SegmentData) {
           newState = "paused";
           break;
       }
-  
+
       updateState(startButton, newState);
     });
 
@@ -50,27 +49,27 @@ export function initVisualisation(map: L.Map, speedData: SegmentData) {
     stopButton.addEventListener("click", function () {
       updateState(startButton, "stopped");
       pauseVisualisation();
-  
+
       console.log("stopButton");
-      
+
       for (let i = 0; i < document.getElementsByClassName("speedometer").length; i++) {
         const element = <HTMLElement>document.getElementsByClassName("speedometer")[i];
         element.style.display = "none";
       }
-  
+
       for (let i = 0; i < document.getElementsByClassName("elevation").length; i++) {
         const element = <HTMLElement>document.getElementsByClassName("elevation")[i];
         element.style.display = "none";
       }
-  
+
       const centerCursor = document.getElementById("centerCursor");
       if (!centerCursor)
         throw new Error("centerCursor missing");
       centerCursor.style.display = "none";
-  
+
       window.__GLOBAL_DATA__.currentIndex = 0;
     });
-  
+
     stopButton.classList.add("initialized");
   }
 }

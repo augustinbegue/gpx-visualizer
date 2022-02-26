@@ -13,22 +13,27 @@ export function animate(i: number, map: L.Map, speedSelector: HTMLSelectElement,
     return;
   }
 
-  if (e.computed.time) {
-    map.panTo(<L.LatLngExpression>e.loc2.loc, { animate: true, duration: e.computed.time / animationSpeed, noMoveStart: true, easeLinearity: 1 });
-    placeChartPointer(i, speedData)
-    i++;
+  let zoom = map.getZoom();
 
+  if (e.computed.time) {
     if (e.computed.speed && e.computed.filteredSpeed && e.computed.time > 0.2 / animationSpeed) {
-      if (e.computed.speed < 3) {
+      if (e.computed.speed < 5) {
         displayLiveSpeed(Math.round(e.computed.speed), e.computed.time, animationSpeed);
+        zoom = 20;
       } else {
         displayLiveSpeed(Math.round(e.computed.filteredSpeed), e.computed.time, animationSpeed);
+        zoom = 17;
       }
 
       if (e.loc2.ele) {
         display("elevation", Math.round(e.loc2.ele).toString())
       }
     }
+
+    map.setZoom(zoom, { animate: true, duration: e.computed.time * 1000 / animationSpeed });
+    map.panTo(<L.LatLngExpression>e.loc1.loc, { animate: true, duration: e.computed.time / animationSpeed, noMoveStart: true, easeLinearity: 1 });
+    placeChartPointer(i, speedData)
+    i++;
 
     let timeout = (e.computed.time * 1000) / animationSpeed;
 
@@ -63,15 +68,21 @@ function displayLiveSpeed(computedSpeed: number, duration: number, animationSpee
 
   if (duration > 0.2 / animationSpeed) {
     if (animationSpeed > 5 || difference <= 2) {
-      return (liveSpeedSpan.innerHTML = computedSpeed.toString());
+      liveSpeedSpan.innerHTML = computedSpeed.toString();
+      return;
     }
 
     // Smooth speed display is animation speed is slower than 10 or difference higher than 1
     let interval = setInterval(function () {
       let displayedSpeed = parseInt(liveSpeedSpan.innerText);
 
-      if (displayedSpeed === computedSpeed || displayedSpeed < 0) {
+      if (displayedSpeed === computedSpeed) {
         liveSpeedSpan.innerHTML = computedSpeed.toString();
+        clearInterval(interval);
+      }
+
+      if (displayedSpeed < 0) {
+        displayedSpeed = 0;
         clearInterval(interval);
       }
 

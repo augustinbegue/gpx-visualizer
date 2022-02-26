@@ -9,7 +9,7 @@ export async function initMap() {
     throw new Error("mapBox container not found");
   mapContainer.innerHTML = '<div id="rideMap"></div>';
 
-  const { default: L } = await import(/* webpackChunkName: "leaflet" */ 'leaflet');
+  const { default: L } = await import('leaflet');
   const map = L.map("rideMap");
 
   return map;

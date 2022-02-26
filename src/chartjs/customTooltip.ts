@@ -1,10 +1,9 @@
 import { placeLocationMarkerFromIndex } from "../leaflet/animation/placeLocationMarker";
-import { getChartIndex } from "./labelHelper";
 
 export async function customTooltip(tooltipModel: Chart.ChartTooltipModel): Promise<void | undefined> {
   const { default: Chart } = await import(/* webpackChunkName: "chartjs" */ 'chart.js');
-  
-  let { tooltipEl, tooltipPointer, locationMarker } = initTooltip();
+
+  let { tooltipEl, tooltipPointer } = initTooltip();
 
   // Hide if no tooltip
   if (tooltipModel.opacity === 0) {
@@ -45,11 +44,11 @@ export function initTooltip() {
     document.body.appendChild(tooltipEl);
     document.body.appendChild(tooltipPointer);
   }
-  
+
   return { tooltipEl, tooltipPointer, locationMarker };
 }
 
-export function updateTooltipData(tooltipModel: Chart.ChartTooltipModel, getBody: (bodyItem: Chart.ChartTooltipModelBody) => string[], tooltipEl: HTMLElement, Chart: any) {
+export function updateTooltipData(tooltipModel: Chart.ChartTooltipModel, getBody: (bodyItem: Chart.ChartTooltipModelBody) => string[], tooltipEl: HTMLElement, _: any) {
   if (tooltipModel.body) {
     const titleLines = tooltipModel.title || [];
     const bodyLines = tooltipModel.body.map(getBody);
@@ -62,7 +61,7 @@ export function updateTooltipData(tooltipModel: Chart.ChartTooltipModel, getBody
     });
     innerHtml += '</thead><tbody>';
 
-    bodyLines.forEach(function (body, i) {
+    bodyLines.forEach(function (body, _) {
       if (body[0].startsWith(`Elevation`)) {
         let text = body.toString();
         text += 'm';
@@ -83,7 +82,7 @@ export function updateTooltipData(tooltipModel: Chart.ChartTooltipModel, getBody
   }
 }
 
-export function setTooltipStyle(tooltipEl: HTMLElement, tooltipModel: Chart.ChartTooltipModel, tooltipPointer: HTMLElement, Chart: any) {
+export function setTooltipStyle(tooltipEl: HTMLElement, tooltipModel: Chart.ChartTooltipModel, tooltipPointer: HTMLElement, _: any) {
   const position = <DOMRect>window.__GLOBAL_DATA__.chart.canvas?.getBoundingClientRect();
 
   // Display, position, and set styles for font

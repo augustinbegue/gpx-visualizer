@@ -1,6 +1,7 @@
 import { customTooltip } from "./customTooltip";
+import { ChartOptions } from "chart.js";
 
-export const chartOptions: Chart.ChartOptions = {
+export const chartOptions: ChartOptions = {
   tooltips: {
     enabled: false,
     custom: customTooltip,

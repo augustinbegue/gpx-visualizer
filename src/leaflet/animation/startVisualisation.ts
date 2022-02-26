@@ -1,5 +1,4 @@
 import * as L from "leaflet";
-import { SegmentData } from "../../types";
 import { animate } from "./animate";
 
 export function startVisualisation() {

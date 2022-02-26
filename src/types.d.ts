@@ -1,6 +1,6 @@
 export interface GpxSegment {
   loc: Array<number>;
-  ele?: Coordinates["altitude"];
+  ele?: number;
   time?: number;
   temp?: number;
   hr?: number;

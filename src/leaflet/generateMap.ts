@@ -17,7 +17,7 @@ export async function generateMap(gpxData: GpxData, speedData: Array<Segment>, s
 
   addControls(<L.Map>map, <L.LayerGroup>markers);
 
-  initVisualisation(<L.Map>map, speedData);
+  initVisualisation();
 
   return map;
 }

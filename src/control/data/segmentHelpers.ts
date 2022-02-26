@@ -1,4 +1,4 @@
-export function getSegDistance(lat1: Coordinates["latitude"], lon1: Coordinates["longitude"], lat2: Coordinates["latitude"], lon2: Coordinates["longitude"], ele1?: Coordinates["altitude"], ele2?: Coordinates["altitude"]): number {
+export function getSegDistance(lat1: number, lon1: number, lat2: number, lon2: number, ele1?: number, ele2?: number): number {
   const R = 6371e3; // metres
   const φ1 = (lat1 * Math.PI) / 180; // φ, λ in radians
   const φ2 = (lat2 * Math.PI) / 180;

@@ -7,5 +7,7 @@ export function returnFileSize(number: number) {
   }
   else if (number >= 1048576) {
     return (number / 1048576).toFixed(1) + " Mo";
+  } else {
+    return "N/A";
   }
 }
