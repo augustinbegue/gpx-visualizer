@@ -45,6 +45,9 @@ function displayLiveSpeed(computedSpeed: number, duration: number, animationSpee
   const currentSpeed = parseInt(liveSpeedSpan.innerText);
   let sign: number, difference: number;
 
+  if (computedSpeed < 0)
+    computedSpeed = 0;
+
   if (currentSpeed > computedSpeed) {
     sign = -1;
     difference = currentSpeed - computedSpeed;
@@ -89,7 +92,7 @@ function placeChartPointer(index: number, speedData: Array<Segment>) {
 
   const chartData = getChartData(speedData)
 
-  if (!chartData.datasets || !chartData.datasets[0].data || !chartData.datasets[1].data  || !chartData.labels) {
+  if (!chartData.datasets || !chartData.datasets[0].data || !chartData.datasets[1].data || !chartData.labels) {
     return;
   }
 

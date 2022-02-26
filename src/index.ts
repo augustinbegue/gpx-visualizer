@@ -17,6 +17,7 @@ window.onload = function () {
 
   initDragAndDrop();
 
+  // File selection initialization
   const fileSelect = document.getElementById("fileSelect"),
     fileElem = <HTMLInputElement>document.getElementById("ride");
 
@@ -31,9 +32,42 @@ window.onload = function () {
     false
   );
 
-  fileElem?.addEventListener("change", function() {
+  fileElem?.addEventListener("change", function () {
     loadFile(<FileList>this.files)
   })
+
+  // Fullscreen
+  const fullscreenButton = document.getElementById("fullscreen");
+
+  fullscreenButton?.addEventListener("click", function () {
+    let mapBox = document.getElementById("mapBox");
+    if (mapBox) {
+      mapBox.requestFullscreen();
+      mapBox.classList.add("fullscreen");
+    }
+  });
+
+  document.addEventListener('fullscreenchange', fullScreenExitHandler, false);
+  document.addEventListener('mozfullscreenchange', fullScreenExitHandler, false);
+  document.addEventListener('MSFullscreenChange', fullScreenExitHandler, false);
+  document.addEventListener('webkitfullscreenchange', fullScreenExitHandler, false);
+
+  function fullScreenExitHandler() {
+    if (!document.fullscreenElement) {
+      let mapBox = document.getElementById("mapBox");
+      mapBox?.classList.remove("fullscreen");
+    }
+  }
+
+
+  // Keyboard shortcuts
+  document.addEventListener("keydown", function (e) {
+    // Space to toggle play/pause
+    if (e.code === "Space") {
+      const playButton = document.getElementById("startVisualisation");
+      playButton?.click();
+    }
+  });
 };
 
 
