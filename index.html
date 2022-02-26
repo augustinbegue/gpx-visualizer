@@ -1,167 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GPX Visualizer</title>
-    <script src="./index.bundle.js"></script>
-    <!-- Custom style -->
-    <link rel="stylesheet" href="./styles.css" />
-    <!-- Bulma -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
-    <!-- Fontawesome -->
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-  </head>
-  <body>
-    <div id="dropbox" class="container file-selector">
-      <div class="box mt-5 has-text-centered">
-        <div class="notification file-info">
-          Select or drag and drop your gpx file.
-        </div>
-        <a class="button is-rounded" href="#" id="fileSelect">
-          <span class="icon">
-            <i class="fas fa-file-upload"></i>
-          </span>
-          <span>Upload</span>
-        </a>
-        <input type="file" name="ride" id="ride" accept=".gpx" style="display: none;" />
-      </div>
-      <div id="gpx" class="box gpx-overview has-text-centered" style="display: none;">
-        <div class="columns is-mobile">
-          <div class="column">
-            <p class="heading">Ride Name</p>
-            <p class="title is-4" id="gpxName"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Segments</p>
-            <p class="title is-4" id="gpxSegs"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Distance</p>
-            <p class="title is-4" id="distance"></p>
-          </div>
-        </div>
-        <div class="columns is-mobile">
-          <div class="column">
-            <p class="heading">Time</p>
-            <p class="title is-4" id="totalTime"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Moving Time</p>
-            <p class="title is-4" id="movingTime"></p>
-          </div>
-        </div>
-        <div class="columns is-mobile">
-          <div class="column">
-            <p class="heading">Average speed</p>
-            <p class="title is-4" id="avgSpeed"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Average moving speed</p>
-            <p class="title is-4" id="avgMovingSpeed"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Max Speed</p>
-            <p class="title is-4" id="maxSpeed"></p>
-          </div>
-        </div>
-        <div class="columns is-mobile">
-          <div class="column">
-            <p class="heading">Min Elevation</p>
-            <p class="title is-4" id="minEle"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Elevation Gain</p>
-            <p class="title is-4" id="gainEle"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Max Elevation</p>
-            <p class="title is-4" id="maxEle"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Total Evolution</p>
-            <p class="title is-4" id="totEle"></p>
-          </div>
-        </div>
-        <div class="columns is-mobile">
-          <div class="column">
-            <p class="heading">Average Temp</p>
-            <p class="title is-5" id="avgTemp"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Max Temp</p>
-            <p class="title is-5" id="maxTemp"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Average Heart Rate</p>
-            <p class="title is-5" id="avgHr"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Max Heart Rate</p>
-            <p class="title is-5" id="maxHr"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Average Cadence</p>
-            <p class="title is-5" id="avgCad"></p>
-          </div>
-          <div class="column">
-            <p class="heading">Max Cadence</p>
-            <p class="title is-5" id="maxCad"></p>
-          </div>
-        </div>
-      </div>
-      <div id="mapBox" class="box" style="display: none;">
-        <div id="mapWrapper" class="mb-3">
-          <span id="centerCursor"></span>
-          <div id="mapContainer">
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+  <title>GPX Visualizer</title>
+  <script src="./index.bundle.js"></script>
+  <!-- Custom style -->
+  <link rel="stylesheet"
+        href="./styles.css" />
+  <!-- Bulma -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
+  <!-- Fontawesome -->
+  <script defer
+          src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <!-- Leaflet -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+          integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+          crossorigin=""></script>
+</head>
+
+<body>
+  <div id="dropbox"
+       class="container file-selector">
+    <div class="box mt-5 has-text-centered">
+      <div class="notification file-info">
+        Select or drag and drop your gpx file.
+      </div>
+      <a class="button is-rounded"
+         href="#"
+         id="fileSelect">
+        <span class="icon">
+          <i class="fas fa-file-upload"></i>
+        </span>
+        <span>Upload</span>
+      </a>
+      <input type="file"
+             name="ride"
+             id="ride"
+             accept=".gpx"
+             style="display: none;" />
+    </div>
+    <div id="gpx"
+         class="box gpx-overview has-text-centered"
+         style="display: none;">
+      <div class="columns is-mobile">
+        <div class="column">
+          <p class="heading">Ride Name</p>
+          <p class="title is-4"
+             id="gpxName"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Segments</p>
+          <p class="title is-4"
+             id="gpxSegs"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Distance</p>
+          <p class="title is-4"
+             id="distance"></p>
+        </div>
+      </div>
+      <div class="columns is-mobile">
+        <div class="column">
+          <p class="heading">Time</p>
+          <p class="title is-4"
+             id="totalTime"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Moving Time</p>
+          <p class="title is-4"
+             id="movingTime"></p>
+        </div>
+      </div>
+      <div class="columns is-mobile">
+        <div class="column">
+          <p class="heading">Average speed</p>
+          <p class="title is-4"
+             id="avgSpeed"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Average moving speed</p>
+          <p class="title is-4"
+             id="avgMovingSpeed"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Max Speed</p>
+          <p class="title is-4"
+             id="maxSpeed"></p>
+        </div>
+      </div>
+      <div class="columns is-mobile">
+        <div class="column">
+          <p class="heading">Min Elevation</p>
+          <p class="title is-4"
+             id="minEle"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Elevation Gain</p>
+          <p class="title is-4"
+             id="gainEle"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Max Elevation</p>
+          <p class="title is-4"
+             id="maxEle"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Total Evolution</p>
+          <p class="title is-4"
+             id="totEle"></p>
+        </div>
+      </div>
+      <div class="columns is-mobile">
+        <div class="column">
+          <p class="heading">Average Temp</p>
+          <p class="title is-5"
+             id="avgTemp"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Max Temp</p>
+          <p class="title is-5"
+             id="maxTemp"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Average Heart Rate</p>
+          <p class="title is-5"
+             id="avgHr"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Max Heart Rate</p>
+          <p class="title is-5"
+             id="maxHr"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Average Cadence</p>
+          <p class="title is-5"
+             id="avgCad"></p>
+        </div>
+        <div class="column">
+          <p class="heading">Max Cadence</p>
+          <p class="title is-5"
+             id="maxCad"></p>
+        </div>
+      </div>
+    </div>
+    <div id="mapBox"
+         class="box"
+         style="display: none;">
+      <div id="mapWrapper"
+           class="mb-3">
+        <span id="centerCursor"></span>
+        <div id="mapContainer">
+
+        </div>
+      </div>
+      <div id="mapBoxButtons"
+           class="columns is-mobile">
+        <div class="column">
+          <div class="buttons">
+            <button id="startVisualisation"
+                    class="button is-rounded">
+              <span class="icon">
+                <i class="fas fa-play"></i>
+              </span>
+            </button>
+            <button id="stopVisualisation"
+                    class="button is-rounded">
+              <span class="icon">
+                <i class="fas fa-stop"></i>
+              </span>
+            </button>
+            <button id="fullscreen"
+                    class="button is-rounded">
+              <span class="icon">
+                <i class="fas fa-expand"></i>
+              </span>
+            </button>
           </div>
         </div>
-        <div class="columns is-mobile">
-          <div class="column">
-            <div class="buttons">
-              <button id="startVisualisation" class="button is-rounded">
-                <span class="icon">
-                  <i class="fas fa-play"></i>
-                </span>
-              </button>
-              <button id="stopVisualisation" class="button is-rounded">
-                <span class="icon">
-                  <i class="fas fa-stop"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="column">
-            <div class="field">
-              <div class="control has-icons-left">
-                <div class="select is-rounded">
-                  <select id="speedSelector">
-                    <option selected value="1">x1</option>
-                    <option value="2">x2</option>
-                    <option value="5">x5</option>
-                    <option value="10">x10</option>
-                    <option value="20">x20</option>
-                    <option value="100">x100</option>
-                  </select>
-                </div>
-                <div class="icon is-small is-left">
-                  <i class="fas fa-tachometer-alt"></i>
-                </div>
+        <div class="column">
+          <div class="field">
+            <div class="control has-icons-left">
+              <div class="select is-rounded">
+                <select id="speedSelector">
+                  <option selected
+                          value="1">x1</option>
+                  <option value="2">x2</option>
+                  <option value="5">x5</option>
+                  <option value="10">x10</option>
+                  <option value="20">x20</option>
+                  <option value="100">x100</option>
+                </select>
+              </div>
+              <div class="icon is-small is-left">
+                <i class="fas fa-tachometer-alt"></i>
               </div>
             </div>
           </div>
         </div>
-        <div id="speedChartContainer">
+      </div>
+      <div id="speedChartContainer">
 
-        </div>
-        <div id="dataChartContainer">
+      </div>
+      <div id="dataChartContainer">
 
-        </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

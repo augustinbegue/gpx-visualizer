@@ -1,114 +1,150 @@
 .file-selector {
-  width: 100vw;
-  height: 100vh;
+    width: 100vw;
+    height: 100vh;
 }
 
 #rideMap {
-  height: 65vh;
-  border-radius: 1em;
-  z-index: 1;
+    height: 65vh;
+    border-radius: 1em;
+    z-index: 1;
 }
 
 #mapWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#mapContainer, #mapWrapper, #rideMap {
-  width: 100%;
+#mapContainer,
+#mapWrapper,
+#rideMap {
+    width: 100%;
 }
 
-#centerCursor, #locationMarker {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: #4287f5;
-  border: 4px solid white;
-  border-radius: 20px;
-  display: block;
-  z-index: 10;
-  display: none;
+#centerCursor,
+#locationMarker {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #4287f5;
+    border: 4px solid white;
+    border-radius: 20px;
+    z-index: 10;
+    display: none;
 }
 
 #gpx .column {
-  display: none;
+    display: none;
 }
 
 .location-marker-container {
-  position: absolute;
-  width: 20px;
-  height: 20px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
 }
 
 .speedometer {
-  border-radius: 20em;
-  overflow: hidden;
-  background-color: white;
-  border: 4px solid red;
-  padding: 0.5em;
-  width: 10em;
-  height: 10em;
-  text-align: center;
-  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-  -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-  box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-  display: none;
+    border-radius: 20em;
+    overflow: hidden;
+    background-color: white;
+    border: 4px solid red;
+    padding: 0.5em;
+    width: 10em;
+    height: 10em;
+    text-align: center;
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    display: none;
 }
 
 .speedometer-text {
-  font-weight: 700;
-  font-size: 5em;
+    font-weight: 700;
+    font-size: 5em;
 }
 
 .speedometer-legend {
-  position: relative;
-  font-size: 1em !important;
-  bottom: 1em;
+    position: relative;
+    font-size: 1em !important;
+    bottom: 1em;
 }
 
 .elevation {
-  border-radius: 1em;
-  overflow: hidden;
-  background-color: white;
-  border: 4px solid gray;
-  padding: 0.5em;
-  width: 11em;
-  height: 6em;
-  text-align: center;
-  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-  -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-  box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-  display: none;
+    border-radius: 1em;
+    overflow: hidden;
+    background-color: white;
+    border: 4px solid gray;
+    padding: 0.5em;
+    width: 11em;
+    height: 6em;
+    text-align: center;
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    display: none;
 }
 
 .elevation-text {
-  font-weight: 700;
-  font-size: 3em;
+    font-weight: 700;
+    font-size: 3em;
 }
 
 .elevation-legend {
-  font-size: 1em !important;
-  text-transform: uppercase;
+    font-size: 1em !important;
+    text-transform: uppercase;
 }
 
 #speedChartContainer {
-  position: relative;
-  height: 25vh;
-  width: 100%;
+    position: relative;
+    height: 25vh;
+    width: 100%;
 }
 
 #chartjs-tooltip {
-  background-color: #292929CC;
-  border-radius: 4px;
-  color: white;
+    background-color: #292929cc;
+    border-radius: 4px;
+    color: white;
 }
 
 #chartjs-pointer {
-  width: 1px;
-  background-color: #292929;
+    width: 1px;
+    background-color: #292929;
 }
 
 .dropdown-menu {
-  padding: 0 !important;
+    padding: 0 !important;
+}
+
+.fullscreen #mapBoxButtons {
+    display: none !important;
+}
+
+.fullscreen #speedChartContainer {
+    display: none !important;
+}
+
+.fullscreen #dataChartContainer {
+    display: none !important;
+}
+
+.fullscreen #mapContainer {
+    justify-content: center;
+    height: 20vh !important;
+    width: 40vh !important;
+}
+
+.fullscreen #rideMap {
+    height: 20vh !important;
+    width: 40vh !important;
+}
+
+.fullscreen #mapWrapper {
+    justify-content: center;
+}
+
+#mapBox.fullscreen {
+    border-radius: 0 !important;
+    background-color: rgb(0, 255, 0);
+    display: flex !important;
+    align-items: flex-end !important;
 }
