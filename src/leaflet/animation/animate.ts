@@ -13,16 +13,16 @@ export function animate(i: number, map: L.Map, speedSelector: HTMLSelectElement,
     return;
   }
 
-  let zoom = map.getZoom();
-
   if (e.computed.time) {
+    map.panTo(<L.LatLngExpression>e.loc2.loc, { animate: true, duration: e.computed.time / animationSpeed, noMoveStart: true, easeLinearity: 1 });
+    placeChartPointer(i, speedData)
+    i++;
+
     if (e.computed.speed && e.computed.filteredSpeed && e.computed.time > 0.2 / animationSpeed) {
-      if (e.computed.speed < 5) {
+      if (e.computed.speed < 3) {
         displayLiveSpeed(Math.round(e.computed.speed), e.computed.time, animationSpeed);
-        zoom = 20;
       } else {
         displayLiveSpeed(Math.round(e.computed.filteredSpeed), e.computed.time, animationSpeed);
-        zoom = 17;
       }
 
       if (e.loc2.ele) {
@@ -30,15 +30,9 @@ export function animate(i: number, map: L.Map, speedSelector: HTMLSelectElement,
       }
     }
 
-    map.setZoom(zoom, { animate: true, duration: e.computed.time * 1000 / animationSpeed });
-    map.panTo(<L.LatLngExpression>e.loc1.loc, { animate: true, duration: e.computed.time / animationSpeed, noMoveStart: true, easeLinearity: 1 });
-    placeChartPointer(i, speedData)
-    i++;
-
     let timeout = (e.computed.time * 1000) / animationSpeed;
 
     window.__GLOBAL_DATA__.timeout = setTimeout(animate, timeout, i, map, speedSelector, speedData);
-
   }
 }
 
