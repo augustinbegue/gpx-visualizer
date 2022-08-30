@@ -11,7 +11,7 @@
     "@types/chart.js": "^2.9.35",
     "@types/leaflet": "^1.5.17",
     "typescript": "^4.5.4",
-    "vite": "^2.8.0"
+    "vite": "^2.9.13"
   },
   "dependencies": {
     "chart.js": "^2.9.4",
